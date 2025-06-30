@@ -83,7 +83,7 @@ def portfolio_combinations(assets: List[str], k: int) -> List[Tuple[str, ...]]:
     return list(itertools.combinations(assets, k))
 
 
-# Média Móvel
+# 2. Média Móvel
 def moving_average(prices: List[float], window: int) -> List[float]:
     """
     Calcula a média móvel de uma lista de preços.
