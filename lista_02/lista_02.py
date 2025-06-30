@@ -1,7 +1,10 @@
 import math
 import itertools
 import random
-from typing import List, Tuple, Any, Dict, Iterable
+import urllib
+import os
+from typing import List, Tuple, Any, Iterable
+from tqdm import tqdm
 
 
 # Parte 1: Biblioteca math
@@ -161,3 +164,65 @@ def simulate_stock_price(
         new_price = prices[-1] + variation
         prices.append(new_price)
     return prices
+
+
+# Parte 4: Bibliotecas urllib e os
+
+
+# 1. Download e Concatenação de Dados do BLS QCEW
+def download_and_merge(
+    years_quarters: List[Tuple[int, int]],
+    output_file: str,
+) -> None:
+    """
+    Baixa dados do BLS QCEW para diferentes trimestres e anos e os
+    concatena em um único arquivo CSV.
+
+    Args:
+        years_quarters (List[Tuple[int, int]]): Lista de tuplas com ano
+        e trimestre.
+        output_file (str): Caminho do arquivo CSV de saída.
+
+    Returns:
+        None
+    """
+    # Cria o diretório data/ se não existir
+    if not os.path.exists("data"):
+        os.makedirs("data")
+
+    # Lista para armazenar os caminhos dos arquivos baixados
+    downloaded_files = []
+
+    for year, quarter in tqdm(
+        years_quarters,
+        desc="Baixando os arquivos do BLS QCEW",
+    ):
+        url = (
+            "https://data.bls.gov/cew/data/api/"
+            f"{year}/{quarter}/industry/10.csv"
+        )
+        file_path = f"data/{year}_q{quarter}.csv"
+        # Baixa o arquivo
+        urllib.request.urlretrieve(url, file_path)
+        downloaded_files.append(file_path)
+
+    # Lista todos os arquivos baixados ordenados pelo nome
+    downloaded_files.sort()
+    print("Arquivos baixados:")
+    for file_ in downloaded_files:
+        print(file_)
+
+    # Gerando o output_file
+    with open(output_file, "w", encoding="utf-8") as outfile:
+        header_written = False
+        for file_path in downloaded_files:
+            with open(file_path, "r", encoding="utf-8") as infile:
+                infile = list(infile)
+                if not header_written:
+                    # Escreve o cabeçalho do primeiro arquivo
+                    header = infile[0]
+                    outfile.write(header)
+                    header_written = True
+                for line in infile[1:]:
+                    # Escreve as linhas de dados (sem cabeçalho)
+                    outfile.write(line)
