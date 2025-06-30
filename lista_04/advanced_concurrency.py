@@ -96,12 +96,12 @@ def calcular_volatilidade(
     de forma concorrente, dividindo o trabalho entre várias threads.
 
     Args:
-        retornos: Array NumPy de retornos diários.
-        janela: Tamanho da janela para o cálculo da volatilidade.
-        num_threads: Número de threads a serem usadas.
+        retornos (np.ndarray): Vetor de retornos financeiros.
+        janela (int): Tamanho da janela para o cálculo da volatilidade.
+        num_threads (int): Número de threads a serem utilizadas.
 
     Returns:
-        Um array NumPy com as volatilidades calculadas para cada janela.
+        np.ndarray: Vetor de volatilidades calculadas para cada janela.
     """
     # Número total de cálculos de volatilidade a serem feitos.
     total_calculos = len(retornos) - janela + 1
