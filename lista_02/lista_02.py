@@ -159,7 +159,7 @@ def simulate_stock_price(
 
     # Simulação do preço da ação
     prices = [initial_price]
-    for _ in range(days-1):
+    for _ in range(days):
         variation = random.gauss(mu, sigma)
         new_price = prices[-1] + variation
         prices.append(new_price)
