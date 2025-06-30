@@ -1,4 +1,4 @@
-# Lista 1 de Introdução à Programação e Ciência de Dados
+# Listas de Introdução à Programação e Ciência de Dados
 
 Professor: Rafael de Pinho
 
@@ -8,6 +8,7 @@ Aluno: Iago Dantas Figueirêdo
 
 ## Organização do Código
 
-- Todas resoluções (funções) estão no arquivo `lista_01.py`;
-
-- O notebook `lista_01.ipynb` contém somente exemplos de uso das funções.
+- Uma pasta para cada lista.
+- Cada pasta contem:
+    - um arquivo .py com as funções,
+    - e um arquivo .ipynb com os exemplos de uso.
