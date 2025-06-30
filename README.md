@@ -10,5 +10,5 @@ Aluno: Iago Dantas Figueirêdo
 
 - Uma pasta para cada lista.
 - Cada pasta contem:
-    - um arquivo .py com as funções,
+    - módulos .py com as funções de cada exercício,
     - e um arquivo .ipynb com os exemplos de uso.
